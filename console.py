@@ -127,7 +127,7 @@ class HBNBCommand(cmd.Cmd):
         commands.pop(0)
         for param in commands:
             data = param.split("=", 1)
-            if (len(data) == 2):
+            if (len(data) == 2 and data[1]):
                 if (data[1][0] == "\""):
                     data[1] = data[1].replace("\"", "")
                     data[1] = data[1].replace("_", " ")
@@ -135,7 +135,7 @@ class HBNBCommand(cmd.Cmd):
                 if ("." in data[1]):
                     number = data[1].split(".")
                     if (len(number) != 2):
-                        return
+                        continue
                     if (number[0].isdigit() and number[1].isdigit()):
                         setattr(new_instance, data[0], float(data[1]))
                 if (data[1].isdigit()):

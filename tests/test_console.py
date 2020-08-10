@@ -249,5 +249,71 @@ class TestConsoleClass(unittest.TestCase):
             HBNBCommand().onecmd('all State')
             self.assertTrue("California" in my_id.getvalue())
 
+    def test_create_underscore_st(self):
+        """ Checks if the attribute name is missing """
+        with patch('sys.stdout', new=StringIO()) as my_id:
+            HBNBCommand().onecmd('create State name="California_is_life"')
+            basemodel_id = my_id.getvalue()
+            self.assertTrue(len(basemodel_id) > 0)
+        with patch('sys.stdout', new=StringIO()) as my_id:
+            HBNBCommand().onecmd('all State')
+            self.assertTrue("California is life" in my_id.getvalue())
+
+    def test_create_float_st(self):
+        """ Checks if the attribute name is missing """
+        with patch('sys.stdout', new=StringIO()) as my_id:
+            HBNBCommand().onecmd('create State people=2.5')
+            basemodel_id = my_id.getvalue()
+            self.assertTrue(len(basemodel_id) > 0)
+        with patch('sys.stdout', new=StringIO()) as my_id:
+            HBNBCommand().onecmd('all State')
+            self.assertTrue("2.5" in my_id.getvalue())
+
+    def test_create_int_st(self):
+        """ Checks if the attribute name is missing """
+        with patch('sys.stdout', new=StringIO()) as my_id:
+            HBNBCommand().onecmd('create State money=500')
+            basemodel_id = my_id.getvalue()
+            self.assertTrue(len(basemodel_id) > 0)
+        with patch('sys.stdout', new=StringIO()) as my_id:
+            HBNBCommand().onecmd('all State')
+            self.assertTrue("500" in my_id.getvalue())
+
+    def test_create_error_int(self):
+        """ Checks if the attribute name is missing """
+        with patch('sys.stdout', new=StringIO()) as my_id:
+            HBNBCommand().onecmd('create State name=5055m')
+            basemodel_id = my_id.getvalue()
+            self.assertTrue(len(basemodel_id) > 0)
+        with patch('sys.stdout', new=StringIO()) as my_id:
+            HBNBCommand().onecmd('all State')
+            self.assertTrue("5055m" not in my_id.getvalue())
+
+    def test_create_error_float(self):
+        """ Checks if the attribute name is missing """
+        with patch('sys.stdout', new=StringIO()) as my_id:
+            HBNBCommand().onecmd('create State name=hello.world')
+            basemodel_id = my_id.getvalue()
+            self.assertTrue(len(basemodel_id) > 0)
+        with patch('sys.stdout', new=StringIO()) as my_id:
+            HBNBCommand().onecmd('all State')
+            self.assertTrue("hello.world" not in my_id.getvalue())
+
+    def test_create_errdata(self):
+        """ Checks if the attribute name is missing """
+        with patch('sys.stdout', new=StringIO()) as my_id:
+            HBNBCommand().onecmd("""create City name="Cali" haosi=
+                                 last="Fornia" car=255.hola money=5.5""")
+            basemodel_id = my_id.getvalue()
+            self.assertTrue(len(basemodel_id) > 0)
+        with patch('sys.stdout', new=StringIO()) as my_id:
+            HBNBCommand().onecmd('all City')
+            self.assertTrue("name" in my_id.getvalue())
+            self.assertTrue("Cali" in my_id.getvalue())
+            self.assertTrue("last" in my_id.getvalue())
+            self.assertTrue("Fornia" in my_id.getvalue())
+            self.assertTrue("5.5" in my_id.getvalue())
+            self.assertTrue("money" in my_id.getvalue())
+
 if __name__ == '__main__':
     unittest.main()

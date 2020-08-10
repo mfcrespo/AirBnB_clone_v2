@@ -230,7 +230,7 @@ class HBNBCommand(cmd.Cmd):
             for k, v in storage._FileStorage__objects.items():
                 print_list.append(str(v))
 
-        print(print_list)
+        print(str(print_list).replace("\"", ""))
 
     def help_all(self):
         """ Help information for the all command """

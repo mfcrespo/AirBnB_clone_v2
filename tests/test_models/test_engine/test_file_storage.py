@@ -41,6 +41,12 @@ class test_fileStorage(unittest.TestCase):
         temp = storage.all()
         self.assertIsInstance(temp, dict)
 
+    def test_all_cls(self):
+        """ Check instance of objects with args """
+        new = BaseModel()
+        temp = storage.all(new)
+        self.assertIsInstance(temp, dict)
+       
     def test_base_model_instantiation(self):
         """ File is not created on BaseModel save """
         new = BaseModel()
@@ -107,3 +113,9 @@ class test_fileStorage(unittest.TestCase):
         from models.engine.file_storage import FileStorage
         print(type(storage))
         self.assertEqual(type(storage), FileStorage)
+
+    def test_delete(self):
+        """create object and then delete"""
+        new = BaseModel()
+        storage.delete(new)
+        self.assertEqual(storage.all(), {})

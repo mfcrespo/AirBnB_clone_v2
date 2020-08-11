@@ -11,9 +11,16 @@ class FileStorage():
     __file_path = "file.json"
     __objects = {}
 
-    def all(self):
-        """ returns the dictionaries"""
-        return (FileStorage.__objects)
+    def all(self, cls=None):
+        """ returns the list of objects of one type of class """
+        if cls is None:
+            return (FileStorage.__objects)
+        else:
+            cls_dict = {}
+            for key, value in FileStorage.__objects.items():
+                if type(value) == cls:
+                    cls_dict[key] = value
+            return cls_dict
 
     def new(self, obj):
         """ create a new object """
@@ -56,3 +63,11 @@ class FileStorage():
             for key in objects:
                 name = key.split(".")[0]
                 FileStorage.__objects[key] = my_dict[name](**objects[key])
+
+    def delete(self, obj=None):
+        """ to delete obj from __objects if it’s inside """
+        if obj is None:
+            return
+        key = str(obj.__class__.__name__) + "." + str(obj.id)
+        del self.__objects[key]
+        self.save()

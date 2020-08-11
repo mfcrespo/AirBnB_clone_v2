@@ -5,10 +5,20 @@ This is the base model that contains serial/deserial information
 from datetime import datetime
 import uuid
 from models import storage
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from datetime import datetime
+
+
+Base = declarative_base()
 
 
 class BaseModel():
     """ Defines all common attributes/methods for other classes """
+    id = Column(String(60), primary_key=True, nullable=False, unique=True)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
+
     def __init__(self, *args, **kwargs):
         """ Initializes the instances attributes """
         if kwargs:
@@ -23,7 +33,6 @@ class BaseModel():
             self.id = str(uuid.uuid4())
             self.created_at = datetime.today()
             self.updated_at = datetime.today()
-            storage.new(self)
 
     def __str__(self):
         """ Prints object in friendly format"""
@@ -33,6 +42,7 @@ class BaseModel():
     def save(self):
         """ Updates update_at """
         self.updated_at = datetime.today()
+        storage.new(self)
         storage.save()
 
     def to_dict(self):
@@ -41,4 +51,10 @@ class BaseModel():
         new_dict["__class__"] = self.__class__.__name__
         new_dict["created_at"] = self.created_at.isoformat()
         new_dict["updated_at"] = self.updated_at.isoformat()
+        if "_sa_instance_state" in new_dict:
+            del new_dict["_sa_instance_state"]
         return new_dict
+
+    def delete(self):
+        """ Delete current instance from storage """
+        storage.delete(self)

@@ -2,6 +2,7 @@
 """ Console Module """
 import cmd
 import sys
+import shlex
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -118,7 +119,9 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        commands = args.split()
+        print(args)
+        commands = shlex.split(args, posix=False)
+        print(commands)
         class_name = commands[0]
         if class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
@@ -131,6 +134,11 @@ class HBNBCommand(cmd.Cmd):
                 if (data[1][0] == "\""):
                     data[1] = data[1][1:-1]
                     data[1] = data[1].replace("_", " ")
+                    for i in range(len(data[1])):
+                        if (i == 0 and data[1][i] == "\""):
+                            continue
+                        elif (data[1][i] == "\"" and data[1][i - 1] != "\\"):
+                            continue
                     setattr(new_instance, data[0], str(data[1]))
                 elif ("." in data[1]):
                     number = data[1].split(".")

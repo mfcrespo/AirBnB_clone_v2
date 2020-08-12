@@ -135,12 +135,12 @@ class HBNBCommand(cmd.Cmd):
                     valid = 1
                     data[1] = data[1][1:-1]
                     data[1] = data[1].replace("_", " ")
-                    for i in range(len(data[1])):
-                        if (i == 0 and data[1][i] == '"'):
-                            valid = 0
-                        if (data[1][i] == '"'):
-                            if (data[1][i - 1] != '\\'):
-                                valid = 0
+                    # for i in range(len(data[1])):
+                    #    if (i == 0 and data[1][i] == '"'):
+                    #        valid = 0
+                    #    if (data[1][i] == '"'):
+                    #        if (data[1][i - 1] != '\\'):
+                    #            valid = 0
                     if (valid):
                         setattr(new_instance, data[0], str(data[1]))
                 elif ("." in data[1]):

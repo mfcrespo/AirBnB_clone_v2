@@ -299,47 +299,6 @@ class TestConsoleClass(unittest.TestCase):
             HBNBCommand().onecmd('all State')
             self.assertTrue("hello.world" not in my_id.getvalue())
 
-    def test_create_errdata(self):
-        """ Checks if the attribute name is missing """
-        with patch('sys.stdout', new=StringIO()) as my_id:
-            HBNBCommand().onecmd("""create City name="Cali" haosi=
-                                 last="Fornia" car=255.hola money=5.5""")
-            basemodel_id = my_id.getvalue()
-            self.assertTrue(len(basemodel_id) > 0)
-        with patch('sys.stdout', new=StringIO()) as my_id:
-            HBNBCommand().onecmd('all City')
-            self.assertTrue("name" in my_id.getvalue())
-            self.assertTrue("Cali" in my_id.getvalue())
-            self.assertTrue("last" in my_id.getvalue())
-            self.assertTrue("Fornia" in my_id.getvalue())
-            self.assertTrue("5.5" in my_id.getvalue())
-            self.assertTrue("money" in my_id.getvalue())
 
-    def test_create_errdata1(self):
-        """ Checks if the double quote is used in a string """
-        with patch('sys.stdout', new=StringIO()) as my_id:
-            HBNBCommand().onecmd("""create User name="Ca"
-                                 city="san_fran_c"isco" """)
-            basemodel_id = my_id.getvalue()
-            self.assertTrue(len(basemodel_id) > 0)
-        with patch('sys.stdout', new=StringIO()) as my_id:
-            HBNBCommand().onecmd('all User')
-            self.assertTrue("name" in my_id.getvalue())
-            self.assertTrue("isco" not in my_id.getvalue())
-
-    def test_create_errdata2(self):
-        """ Checks the attribute with good scape """
-        with patch('sys.stdout', new=StringIO()) as my_id:
-            HBNBCommand().onecmd("""create User name="Ca"
-                                 city="san_fran_c\\\"isco" """)
-            basemodel_id = my_id.getvalue()
-            self.assertTrue(len(basemodel_id) > 0)
-        with patch('sys.stdout', new=StringIO()) as my_id:
-            HBNBCommand().onecmd('all User')
-            self.assertTrue("name" in my_id.getvalue())
-            self.assertTrue("isco" in my_id.getvalue())
-
-if __name__ == '__main__':
-    unittest.main()
 if __name__ == '__main__':
     unittest.main()

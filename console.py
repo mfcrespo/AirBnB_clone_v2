@@ -116,58 +116,55 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
-        _cls = ''
-
         if not args:
             print("** class name missing **")
             return
-        params = args[:]
-        params = params.partition(' ')
-        _cls = params[0]
-        if _cls not in HBNBCommand.classes:
+        commands = args[:]
+        commands = commands.partition(' ')
+        classes = commands[0]
+        if classes not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
 
-        new_instance = HBNBCommand.classes[_cls]()
-        params = params[2]
+        new_instance = HBNBCommand.classes[classes]()
+        commands = commands[2]
         new_dict = {}
-        while len(params) != 0:
-            params = params.partition(" ")
-            val = params[0].partition("=")
-            _att = val[0]
-            _val = val[2]
-            """ First check if value is integer """
-            if _val.isdecimal():
-                _val = int(_val)
+        while len(commands) != 0:
+            commands = commands.partition(" ")
+            parameter = commands[0].partition("=")
+            key = parameter[0]
+            value = parameter[2]
+            if value.isdecimal():
+                value = int(value)
+            elif ("." in value):
+                number = value.split(".", 1)
+                if (len(number) != 2):
+                    commands = commands[2]
+                    continue
+                if (number[0].isdecimal() and number[1].isdecimal()):
+                    value = float(value)
+                else:
+                    commands = commands[2]
+                    continue
+            elif value[0] is '\"' and value[-1] is '\"':
+                valid = 1
+                value = value[1:-1]
+                value = value.replace('_', ' ')
+                index = value.find('\"', 1)
+                for i in range(len(value)):
+                    if (i == 0 and value[i] == '"'):
+                        valid = 0
+                    if (value[i] == '"'):
+                        if (value[i - 1] != '\\'):
+                            valid = 0
+                if (valid == 0):
+                    commands = commands[2]
+                    continue
             else:
-                try:
-                    """ Trying to cast to float """
-                    _val = float(_val)
-                except ValueError:
-                    """ On float cast error, check if valid string """
-                    if _val[0] is '\"' and _val[-1] is '\"':
-                        _val = _val[1:-1]
-                        """ Replacing underscores for spaces """
-                        _val = _val.replace('_', ' ')
-                        index = _val.find('\"', 1)
-                        flag = 1
-                        """ Checking if double quotes(") are escaped(\) """
-                        while flag and index != -1:
-                            if _val[index - 1] != '\\':
-                                flag = 0
-                                break
-                            index = _val.find('\"', index + 1)
-                        if not flag:
-                            """ value skipped """
-                            params = params[2]
-                            continue
-                    else:
-                        """ value skipped """
-                        params = params[2]
-                        continue
-            new_dict[_att] = _val
-            params = params[2]
-
+                commands = commands[2]
+                continue
+            new_dict[key] = value
+            commands = commands[2]
         new_instance.__dict__.update(new_dict)
         new_instance.save()
         print(new_instance.id)

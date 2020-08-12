@@ -239,7 +239,7 @@ class TestConsoleClass(unittest.TestCase):
             basemodel_id = my_id.getvalue()
             self.assertTrue(len(basemodel_id) > 0)
 
-    def test_existance_create(self):
+    def test_existance_create2(self):
         """ Checks if the attribute name is missing """
         with patch('sys.stdout', new=StringIO()) as my_id:
             HBNBCommand().onecmd('create State name="California"')
@@ -315,5 +315,31 @@ class TestConsoleClass(unittest.TestCase):
             self.assertTrue("5.5" in my_id.getvalue())
             self.assertTrue("money" in my_id.getvalue())
 
+    def test_create_errdata1(self):
+        """ Checks if the double quote is used in a string """
+        with patch('sys.stdout', new=StringIO()) as my_id:
+            HBNBCommand().onecmd("""create User name="Ca"
+                                 city="san_fran_c"isco" """)
+            basemodel_id = my_id.getvalue()
+            self.assertTrue(len(basemodel_id) > 0)
+        with patch('sys.stdout', new=StringIO()) as my_id:
+            HBNBCommand().onecmd('all User')
+            self.assertTrue("name" in my_id.getvalue())
+            self.assertTrue("isco" not in my_id.getvalue())
+
+    def test_create_errdata2(self):
+        """ Checks the attribute with good scape """
+        with patch('sys.stdout', new=StringIO()) as my_id:
+            HBNBCommand().onecmd("""create User name="Ca"
+                                 city="san_fran_c\\\"isco" """)
+            basemodel_id = my_id.getvalue()
+            self.assertTrue(len(basemodel_id) > 0)
+        with patch('sys.stdout', new=StringIO()) as my_id:
+            HBNBCommand().onecmd('all User')
+            self.assertTrue("name" in my_id.getvalue())
+            self.assertTrue("isco" in my_id.getvalue())
+
+if __name__ == '__main__':
+    unittest.main()
 if __name__ == '__main__':
     unittest.main()

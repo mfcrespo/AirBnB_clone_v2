@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Console Module """
 import cmd
+import json
 import sys
 from models.base_model import BaseModel
 from models.__init__ import storage
@@ -126,12 +127,20 @@ class HBNBCommand(cmd.Cmd):
         new_instance = HBNBCommand.classes[class_name]()
         commands.pop(0)
         for param in commands:
+            valid = 1
             data = param.split("=", 1)
             if (len(data) == 2 and data[1]):
-                if (data[1][0] == "\""):
+                if (data[1][0] == "\"" and data[1][-1] == "\""):
                     data[1] = data[1][1:-1]
                     data[1] = data[1].replace("_", " ")
-                    setattr(new_instance, data[0], str(data[1]))
+                    for i in range(len(data[1])):
+                        if (i == 0 and data[1][i] == '"'):
+                            valid = 0
+                        if (data[1][i] == '"'):
+                            if (data[1][i - 1] != '\\'):
+                                valid = 0
+                    if (valid):
+                        setattr(new_instance, data[0], str(data[1]))
                 elif ("." in data[1]):
                     number = data[1].split(".")
                     if (len(number) != 2):
@@ -141,7 +150,7 @@ class HBNBCommand(cmd.Cmd):
                 elif (data[1].isdigit()):
                         setattr(new_instance, data[0], int(data[1]))
         print(new_instance.id)
-        storage.save()
+        new_instance.save()
 
     def help_create(self):
         """ Help information for the create method """
@@ -223,14 +232,18 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
-                if k.split('.')[0] == args:
-                    print_list.append(str(v))
-        else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all(HBNBCommand.classes[args]).items():
                 print_list.append(str(v))
-
-        print(str(print_list).replace("\"", ""))
+        else:
+            for k, v in storage.all().items():
+                print_list.append(str(v))
+        print("[", end="")
+        for i in range(len(print_list)):
+            if (i == len(print_list) - 1):
+                print(print_list[i], end="")
+            else:
+                print(print_list[i], end=", ")
+        print("]")
 
     def help_all(self):
         """ Help information for the all command """

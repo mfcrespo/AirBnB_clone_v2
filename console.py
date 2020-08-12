@@ -126,13 +126,14 @@ class HBNBCommand(cmd.Cmd):
             return
         new_instance = HBNBCommand.classes[class_name]()
         commands.pop(0)
+        updated_dict = {}
         for param in commands:
+            valid = 1
             data = param.split("=", 1)
             if (len(data[0]) == 0):
                 continue
             if (len(data) == 2 and data[1]):
                 if (data[1][0] == "\""):
-                    valid = 1
                     data[1] = data[1][1:-1]
                     data[1] = data[1].replace("_", " ")
                     for i in range(len(data[1])):
@@ -142,18 +143,24 @@ class HBNBCommand(cmd.Cmd):
                             if (data[1][i - 1] != '\\'):
                                 valid = 0
                     if (valid):
-                        setattr(new_instance, data[0], str(data[1]))
+                        str(data[1])
                 elif ("." in data[1]):
                     number = data[1].split(".")
                     if (len(number) != 2):
                         continue
                     if (number[0].isdecimal() and number[1].isdecimal()):
-                        setattr(new_instance, data[0], float(data[1]))
+                        data[1] = float(data[1])
+                    else:
+                        valid = 0
                 elif (data[1].isdecimal()):
-                        setattr(new_instance, data[0], int(data[1]))
-        print(new_instance.id)
+                        data[1] = int(data[1])
+                else:
+                    valid = 0
+                if (valid):
+                    updated_dict[data[0]] = data[1]
+        new_instance.__dict__.update(updated_dict)
         new_instance.save()
-        storage.save()
+        print(new_instance.id)
 
     def help_create(self):
         """ Help information for the create method """

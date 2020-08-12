@@ -119,46 +119,54 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        commands = args.split()
-        class_name = commands[0]
-        if class_name not in HBNBCommand.classes:
+
+        commands = args[:]
+        commands = commands.partition(' ')
+        classes = commands[0]
+        if classes not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[class_name]()
-        commands.pop(0)
-        updated_dict = {}
-        for param in commands:
-            valid = 1
-            data = param.split("=", 1)
-            if (len(data[0]) == 0):
-                continue
-            if (len(data) == 2 and data[1]):
-                if (data[1][0] == "\""):
-                    data[1] = data[1][1:-1]
-                    data[1] = data[1].replace("_", " ")
-                    for i in range(len(data[1])):
-                        if (i == 0 and data[1][i] == '"'):
-                            valid = 0
-                        if (data[1][i] == '"'):
-                            if (data[1][i - 1] != '\\'):
-                                valid = 0
-                    if (valid):
-                        str(data[1])
-                elif ("." in data[1]):
-                    number = data[1].split(".")
-                    if (len(number) != 2):
-                        continue
-                    if (number[0].isdecimal() and number[1].isdecimal()):
-                        data[1] = float(data[1])
-                    else:
-                        valid = 0
-                elif (data[1].isdecimal()):
-                        data[1] = int(data[1])
+
+        new_instance = HBNBCommand.classes[classes]()
+        commands = commands[2]
+        new_dict = {}
+        while len(commands) != 0:
+            commands = commands.partition(" ")
+            parameter = commands[0].partition("=")
+            key = parameter[0]
+            value = parameter[2]
+            if value.isdecimal():
+                value = int(value)
+            elif ("." in value):
+                number = value.split(".", 1)
+                if (len(number) != 2):
+                    commands = commands[2]
+                    continue
+                if (number[0].isdecimal() and number[1].isdecimal()):
+                    value = float(value)
                 else:
-                    valid = 0
-                if (valid):
-                    updated_dict[data[0]] = data[1]
-        new_instance.__dict__.update(updated_dict)
+                    commands = commands[2]
+                    continue
+            elif value[0] is '\"' and value[-1] is '\"':
+                valid = 1
+                value = value[1:-1]
+                value = value.replace('_', ' ')
+                index = value.find('\"', 1)
+                for i in range(len(value)):
+                    if (i == 0 and value[i] == '"'):
+                        valid = 0
+                    if (value[i] == '"'):
+                        if (value[i - 1] != '\\'):
+                            valid = 0
+                if (valid == 0):
+                    commands = commands[2]
+                    continue
+            else:
+                commands = commands[2]
+                continue
+            new_dict[key] = value
+            commands = commands[2]
+        new_instance.__dict__.update(new_dict)
         new_instance.save()
         print(new_instance.id)
 

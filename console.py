@@ -127,24 +127,22 @@ class HBNBCommand(cmd.Cmd):
         new_instance = HBNBCommand.classes[class_name]()
         commands.pop(0)
         for param in commands:
-            data = param.split("=", 1)
-            if (len(data[0]) == 0):
-                continue
+            data = param.split("=")
             if (len(data) == 2 and data[1]):
                 if (data[1][0] == "\""):
                     valid = 1
                     data[1] = data[1][1:-1]
                     data[1] = data[1].replace("_", " ")
-                    # for i in range(len(data[1])):
-                    #    if (i == 0 and data[1][i] == '"'):
-                    #        valid = 0
-                    #    if (data[1][i] == '"'):
-                    #        if (data[1][i - 1] != '\\'):
-                    #            valid = 0
+                    for i in range(len(data[1])):
+                        if (i == 0 and data[1][i] == '"'):
+                            valid = 0
+                        if (data[1][i] == '"'):
+                            if (data[1][i - 1] != '\\'):
+                                valid = 0
                     if (valid):
-                        setattr(new_instance, data[0], str(data[1]))
+                        setattr(new_instance, data[0], data[1])
                 elif ("." in data[1]):
-                    number = data[1].split(".")
+                    number = data[1].split(".", 1)
                     if (len(number) != 2):
                         continue
                     if (number[0].isdigit() and number[1].isdigit()):
@@ -240,14 +238,13 @@ class HBNBCommand(cmd.Cmd):
         else:
             for k, v in storage.all().items():
                 print_list.append(str(v))
-        # print("[", end="")
-        # for i in range(len(print_list)):
-        #    if (i == len(print_list) - 1):
-        #        print(print_list[i], end="")
-        #    else:
-        #        print(print_list[i], end=", ")
-        # print("]")
-        print(print_list)
+        print("[", end="")
+        for i in range(len(print_list)):
+            if (i == len(print_list) - 1):
+                print(print_list[i], end="")
+            else:
+                print(print_list[i], end=", ")
+        print("]")
 
     def help_all(self):
         """ Help information for the all command """

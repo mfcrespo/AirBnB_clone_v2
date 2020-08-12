@@ -325,7 +325,7 @@ class TestConsoleClass(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as my_id:
             HBNBCommand().onecmd('all User')
             self.assertTrue("name" in my_id.getvalue())
-            self.assertTrue("isco" in my_id.getvalue())
+            self.assertTrue("isco" not in my_id.getvalue())
 
     def test_create_errdata2(self):
         """ Checks the attribute with good scape """

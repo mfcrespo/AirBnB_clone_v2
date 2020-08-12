@@ -119,6 +119,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
+
         commands = args[:]
         commands = commands.partition(' ')
         classes = commands[0]

@@ -240,13 +240,14 @@ class HBNBCommand(cmd.Cmd):
         else:
             for k, v in storage.all().items():
                 print_list.append(str(v))
-        print("[", end="")
-        for i in range(len(print_list)):
-            if (i == len(print_list) - 1):
-                print(print_list[i], end="")
-            else:
-                print(print_list[i], end=", ")
-        print("]")
+        # print("[", end="")
+        # for i in range(len(print_list)):
+        #    if (i == len(print_list) - 1):
+        #        print(print_list[i], end="")
+        #    else:
+        #        print(print_list[i], end=", ")
+        # print("]")
+        print(print_list)
 
     def help_all(self):
         """ Help information for the all command """

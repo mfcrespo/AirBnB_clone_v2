@@ -129,6 +129,8 @@ class HBNBCommand(cmd.Cmd):
         for param in commands:
             valid = 1
             data = param.split("=", 1)
+            if (len(data[0]) == 0):
+                continue
             if (len(data) == 2 and data[1]):
                 if (data[1][0] == "\"" and data[1][-1] == "\""):
                     data[1] = data[1][1:-1]

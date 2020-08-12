@@ -127,12 +127,12 @@ class HBNBCommand(cmd.Cmd):
         new_instance = HBNBCommand.classes[class_name]()
         commands.pop(0)
         for param in commands:
-            valid = 1
             data = param.split("=", 1)
             if (len(data[0]) == 0):
                 continue
             if (len(data) == 2 and data[1]):
-                if (data[1][0] == "\"" and data[1][-1] == "\""):
+                if (data[1][0] == "\""):
+                    valid = 1
                     data[1] = data[1][1:-1]
                     data[1] = data[1].replace("_", " ")
                     for i in range(len(data[1])):

@@ -7,9 +7,10 @@ import pep8
 from io import StringIO
 from unittest.mock import patch
 from console import HBNBCommand
-from models.engine.file_storage import FileStorage
+from models.engine.db_storage import DBStorage
 import os
 import sys
+import MySQLdb
 
 
 class TestDBStorage(unittest.TestCase):
@@ -17,6 +18,12 @@ class TestDBStorage(unittest.TestCase):
     Args:
         unittest (): Propertys for unit testing
     """
+    def setUp(self):
+        """ Set up test environment """
+        db_user = "hbnb_test"
+        db_password = "hbnb_test_pwd"
+        db_name = "hbnb_test_db"
+        # Open database connection
 
     maxDiff = None
 
@@ -53,3 +60,9 @@ class TestDBStorage(unittest.TestCase):
         # Check for execution access
         is_exec_true = os.access('models/engine/db_storage.py', os.X_OK)
         self.assertTrue(is_exec_true)
+
+    # def test_sql_creation(self):
+    #    """ checks if sql can create a new row """
+    #    initial_value = ("""SELECT count(*) FROM City""")
+    #    initial_value = cursor.execute(initial_value)
+    #    self.assertTrue(type(initial_value) is str)

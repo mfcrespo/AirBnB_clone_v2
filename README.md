@@ -11,6 +11,10 @@ In this project we must do::
 * Replace the file storage by a Database storage
 * Map your models to a table in database by using an O.R.M.
 
+<p>
+<img src="https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/images/AirBnb_DB_diagramm.jpg" width="80%" height="80%">
+</p>
+
 This repository contains the second stage of a student project to build a clone of the AirBnB website. 
 
 Environment variables will be your best friend for this project!
@@ -38,7 +42,7 @@ AirBnb Clone is a project that consists of several stages linked together, which
 * Web dynamic
 
 ### Diagram AirBnB  clone (MySQL storage)
-![](https://github.com/mfcrespo/AirBnB_clone/blob/master/images/Flow%20Airbnb%20clone.png)
+![](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/images/AirbnbMySql.png)
 
 ## Storage
 
@@ -113,7 +117,7 @@ $ ./console.py
 | David Orejuela | [daorejuela1](https://github.com/daorejuela1) | [DavidOrejuela14](https://twitter.com/DavidOrejuela14) | [davidorejuela14](https://www.linkedin.com/in/davidorejuela14/) |
 
 <p>
-<img src="https://pbs.twimg.com/profile_images/962795960173846528/sl2HspUe_400x400.jpg" width="20%" height="20%">
+<img src="https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/images/DavidOrejuela.jpg" width="20%" height="20%">
 </p>
 
 [David Orejuela](https://twitter.com/DavidOrejuela14)

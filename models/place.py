@@ -26,7 +26,7 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
 
-    if environ["HBNB_TYPE_STORAGE"] == "db":
+    if environ.get("HBNB_TYPE_STORAGE") == "db":
         reviews = relationship("Review", backref="place",
                                cascade="all, delete")
         amenities = relationship("Amenity", backref="place_amenities",

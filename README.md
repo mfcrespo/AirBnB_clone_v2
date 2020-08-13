@@ -38,7 +38,7 @@ AirBnb Clone is a project that consists of several stages linked together, which
 * Web dynamic
 
 ### Diagram AirBnB  clone (MySQL storage)
-![](https://github.com/mfcrespo/AirBnB_clone/blob/master/images/Flow%20Airbnb%20clone.png)
+![](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/images/AirbnbMySql.png)
 
 ## Storage
 

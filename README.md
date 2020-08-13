@@ -80,9 +80,22 @@ You will always use class attributes for any object. Why not instance attributes
 | `test_console.py` | [tests/console.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/tests/test_console.py) | The unittest module for console |
 | `setup_mysql_test.sql` | [setup_mysql_test.sql](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/setup_mysql_test.sql) | Create database and test user |
 | `setup_mysql_dev.sql` | [setup_mysql_dev.sql](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/setup_mysql_dev.sql) | Create database |
-<br>
-<br>
-<center> <h2>General Use</h2> </center>
+
+
+### Usage
+### Basic usage of The Console
+
+| Command | Usage | Example | Functionality |
+| :---: | :---: | :---: | :---: |
+| `help` | `help` | help | displays a list of the commands |
+| `create` | `create <class>` | create BaseModel | Create a new instance |
+| `show` | `show <class> <id>` | show BaseModel 787fds-fdf665-fdf843a1 | Shows a specific instance |
+| `destroy` | `destroy <class> <id>` | destroy BaseModel 787fds-fdf665-fdf843a1 | Deletes a specific instance |
+| `all` | `all` or `all <class>` | all BaseModel | Shows all instance or class |
+| `update` | `update <class> <id> <attribute> <value>` | update BaseModel 787fds-fdf665-fdf843a1 name Maria | Update an attribute in an instance |
+| `quit` | `quit` | quit | Quits the console |
+
+
 
 1. First clone this repository.
 

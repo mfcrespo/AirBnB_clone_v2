@@ -36,23 +36,46 @@ AirBnb Clone is a project that consists of several stages linked together, which
 * Web framework - templating
 * RESTful API
 * Web dynamic
----
 
-<center><h3>Repository Contents by Project Task</h3> </center>
+### Diagram AirBnB  clone (MySQL storage)
+![](https://github.com/mfcrespo/AirBnB_clone/blob/master/images/Flow%20Airbnb%20clone.png)
 
-| Tasks | Files | Description |
-| ----- | ----- | ------ |
-| 0: Authors/README File | [AUTHORS](https://github.com/justinmajetich/AirBnB_clone/blob/dev/AUTHORS) | Project authors |
-| 1: Pep8 | N/A | All code is pep8 compliant|
-| 2: Unit Testing | [/tests](https://github.com/justinmajetich/AirBnB_clone/tree/dev/tests) | All class-defining modules are unittested |
-| 3. Make BaseModel | [/models/base_model.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/base_model.py) | Defines a parent class to be inherited by all model classes|
-| 4. Update BaseModel w/ kwargs | [/models/base_model.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/base_model.py) | Add functionality to recreate an instance of a class from a dictionary representation|
-| 5. Create FileStorage class | [/models/engine/file_storage.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/engine/file_storage.py) [/models/_ _init_ _.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/__init__.py) [/models/base_model.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/base_model.py) | Defines a class to manage persistent file storage system|
-| 6. Console 0.0.1 | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) | Add basic functionality to console program, allowing it to quit, handle empty lines and ^D |
-| 7. Console 0.1 | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) | Update the console with methods allowing the user to create, destroy, show, and update stored data |
-| 8. Create User class | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) [/models/engine/file_storage.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/engine/file_storage.py) [/models/user.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/user.py) | Dynamically implements a user class |
-| 9. More Classes | [/models/user.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/user.py) [/models/place.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/place.py) [/models/city.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/city.py) [/models/amenity.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/amenity.py) [/models/state.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/state.py) [/models/review.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/review.py) | Dynamically implements more classes |
-| 10. Console 1.0 | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) [/models/engine/file_storage.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/engine/file_storage.py) | Update the console and file storage system to work dynamically with all  classes update file storage |
+## Storage
+
+Persistency is really important for a web application. It means: every time your program is executed, it starts with all objects previously created from another execution. Without persistency, all the work done in a previous execution won’t be saved and will be gone.
+
+In this project, you will manipulate 2 types of storage: file and database. For the moment, you will focus on file.
+
+Why separate “storage management” from “model”? It’s to make your models modular and independent. With this architecture, you can easily replace your storage system without re-coding everything everywhere.
+
+You will always use class attributes for any object. Why not instance attributes? For 3 reasons:
+
+* Provide easy class description: everybody will be able to see quickly what a model should contain (which attributes, etc…)
+* Provide default value of any attribute
+* In the future, provide the same model behavior for file storage or database storage
+
+### Files in This Repository:
+
+| File | File Hierarchy | Description |
+| :---: | :---: | :---: |
+| `console.py` | [console.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/console.py) | The main console file |
+| `amenity.py` | [models/amenity.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/models/amenity.py) | The amenity subclass |
+| `base_model.py` | [models/base_model.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/models/base_model.py) | The base model superclass |
+| `city.py` | [models/city.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/models/city.py) | The city subclass | 
+| `place.py` | [models/place.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/models/place.py) | Te place subclass |
+| `review.py` | [models/review.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/models/review.py) | Te review subclass |
+| `state.py` | [models/state.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/models/state.py) | Te state subclass |
+| `user.py` | [models/user.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/models/user.py) | Te user subclass |
+| `file_storage.py` | [models/engine/file_storage.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/models/engine/file_storage.py) | The file storage class |
+| `test_amenity.py` | [tests/test_amenity.py](https://github.com/mfcrespo/AirBnB_clone/blob/master/tests/test_models/test_amenity.py) | The unittest module for amenity |
+| `test_base_model.py` | [tests/base_model.py](https://github.com/mfcrespo/AirBnB_clone/blob/master/tests/test_models/test_base_model.py) | The unittest module for base model |
+| `test_city.py` | [tests/city.py](https://github.com/mfcrespo/AirBnB_clone/blob/master/tests/test_models/test_city.py) | The unittest module for city |
+| `test_place.py` | [tests/place.py](https://github.com/mfcrespo/AirBnB_clone/blob/master/tests/test_models/test_place.py) | The unittest module for place |
+| `test_review.py` | [tests/review.py](https://github.com/mfcrespo/AirBnB_clone/blob/master/tests/test_models/test_review.py) | The unittest module for review |
+| `test_state.py` | [tests/state.py](https://github.com/mfcrespo/AirBnB_clone/blob/master/tests/test_models/test_state.py) | The unittest module for state |
+| `test_user.py` | [tests/user.py](https://github.com/mfcrespo/AirBnB_clone/blob/master/tests/test_models/test_user.py) | The unittest module for user |
+| `test_file_storage.py` | [tests/test_models/test_engine/test_file_storage.py](https://github.com/mfcrespo/AirBnB_clone/blob/master/tests/test_models/test_engine/test_file_storage.py) | The unittest module for file storage |
+| `test_file_storage.py` | [tests/test_models/test_engine/test_file_storage.py](https://github.com/mfcrespo/AirBnB_clone/blob/master/tests/test_models/test_engine/test_file_storage.py) | The unittest module for file storage |
 <br>
 <br>
 <center> <h2>General Use</h2> </center>

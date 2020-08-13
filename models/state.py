@@ -6,6 +6,7 @@ from sqlalchemy.orm import relationship
 from models import storage
 from os import environ
 
+
 class State(BaseModel, Base):
     """ The city class, contains state ID and name """
     __tablename__ = "states"

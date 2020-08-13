@@ -13,6 +13,7 @@ import os
 import sys
 
 
+@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'file')
 class TestConsoleClass(unittest.TestCase):
     """TestConsoleClass resume
     Args:
@@ -312,12 +313,147 @@ class TestConsoleClass(unittest.TestCase):
                              test_cmd.getvalue())
 
         with patch('sys.stdout', new=StringIO()) as test_cmd:
-            HBNBCommand().onecmd('create User')
+            HBNBCommand().onecmd('create Amenity name="WiFi"')
             self.assertTrue(len(test_cmd.getvalue()) > 0)
 
         with patch('sys.stdout', new=StringIO()) as test_cmd:
             HBNBCommand().onecmd('all State')
             self.assertTrue(len(test_cmd.getvalue()) > 0)
+
+
+@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', 'file')
+class TestConsoleClassDB(unittest.TestCase):
+    """TestConsoleClassDB resume
+    Args:
+        unittest (): Propertys for unit testing
+    """
+
+    maxDiff = None
+
+    def test_module_doc(self):
+        """ check for module documentation """
+        self.assertTrue(len(console.__doc__) > 0)
+
+    def test_class_doc(self):
+        """ check for documentation """
+        self.assertTrue(len(HBNBCommand.__doc__) > 0)
+
+    def test_method_docs(self):
+        """ check for method documentation """
+        for func in dir(HBNBCommand):
+            self.assertTrue(len(func.__doc__) > 0)
+
+    def test_pep8(self):
+        """ test base and test_base for pep8 conformance """
+        style = pep8.StyleGuide(quiet=True)
+        file1 = 'console.py'
+        file2 = 'tests/test_console.py'
+        result = style.check_files([file1, file2])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warning).")
+
+    def test_executable_file(self):
+        """ Check if file have permissions to execute"""
+        # Check for read access
+        is_read_true = os.access('console.py', os.R_OK)
+        self.assertTrue(is_read_true)
+        # Check for write access
+        is_write_true = os.access('console.py', os.W_OK)
+        self.assertTrue(is_write_true)
+        # Check for execution access
+        is_exec_true = os.access('console.py', os.X_OK)
+        self.assertTrue(is_exec_true)
+
+    def test_check_help(self):
+        """ Verifies that each command has a help output """
+        with patch('sys.stdout', new=StringIO()) as help_val:
+            HBNBCommand().onecmd("help create")
+            self.assertTrue(len(help_val.getvalue()) > 0)
+        with patch('sys.stdout', new=StringIO()) as help_val:
+            HBNBCommand().onecmd("help all")
+            self.assertTrue(len(help_val.getvalue()) > 0)
+        with patch('sys.stdout', new=StringIO()) as help_val:
+            HBNBCommand().onecmd("help show")
+            self.assertTrue(len(help_val.getvalue()) > 0)
+        with patch('sys.stdout', new=StringIO()) as help_val:
+            HBNBCommand().onecmd("help destroy")
+            self.assertTrue(len(help_val.getvalue()) > 0)
+        with patch('sys.stdout', new=StringIO()) as help_val:
+            HBNBCommand().onecmd("help update")
+            self.assertTrue(len(help_val.getvalue()) > 0)
+
+    def test_create_good(self):
+        """ Test the create function """
+        with patch('sys.stdout', new=StringIO()) as help_val:
+            HBNBCommand().onecmd('create Amenity name="WiFi"')
+            self.assertTrue(len(help_val.getvalue()) > 0)
+
+    def test_create_empty(self):
+        """ Test the create function """
+        with patch('sys.stdout', new=StringIO()) as help_val:
+            HBNBCommand().onecmd("create")
+            self.assertEqual(help_val.getvalue(), "** class name missing **\n")
+
+    def test_create_unknown(self):
+        """ Test the create function """
+        with patch('sys.stdout', new=StringIO()) as val:
+            HBNBCommand().onecmd("create Holberton")
+            self.assertEqual(val.getvalue(), "** class doesn't exist **\n")
+
+    def test_show(self):
+        """ test show with normal parameters """
+        with patch('sys.stdout', new=StringIO()) as val:
+            HBNBCommand().onecmd('create Amenity name="WiFi"')
+            basemodel_id = val.getvalue()
+            self.assertTrue(len(basemodel_id) > 0)
+        with patch('sys.stdout', new=StringIO()) as val:
+            HBNBCommand().onecmd('show Amenity' + basemodel_id)
+            self.assertTrue(val.getvalue() != "** no instance found **\n")
+
+    def test_show_notfound(self):
+        """ Test with class that does not exists """
+        with patch('sys.stdout', new=StringIO()) as val:
+            HBNBCommand().onecmd('show helloo ')
+            self.assertTrue(val.getvalue() == "** class doesn't exist **\n")
+
+    def test_show_empty(self):
+        """ Test with class missing """
+        with patch('sys.stdout', new=StringIO()) as val:
+            HBNBCommand().onecmd('show')
+            self.assertTrue(val.getvalue() == "** class name missing **\n")
+
+    def test_show_id(self):
+        """ Test with id missing """
+        with patch('sys.stdout', new=StringIO()) as val:
+            HBNBCommand().onecmd('show Amenity')
+            self.assertTrue(val.getvalue() == "** instance id missing **\n")
+
+    def test_destroy_empty(self):
+        """ Checks if class is missing """
+        with patch('sys.stdout', new=StringIO()) as val:
+            HBNBCommand().onecmd('destroy')
+            self.assertTrue(val.getvalue() == "** class name missing **\n")
+
+    def test_destroy_wrong(self):
+        """ Checks if class name does not exists """
+        with patch('sys.stdout', new=StringIO()) as val:
+            HBNBCommand().onecmd('destroy fakeclass')
+            self.assertTrue(val.getvalue() == "** class doesn't exist **\n")
+
+    def test_destroy_id(self):
+        """ Check if the id is missing """
+        with patch('sys.stdout', new=StringIO()) as val:
+            HBNBCommand().onecmd('destroy Amenity')
+            self.assertTrue(val.getvalue() == "** instance id missing **\n")
+
+    def test_destroy_notfound(self):
+        """ Checks is the id belongs to an instance """
+        with patch('sys.stdout', new=StringIO()) as val:
+            HBNBCommand().onecmd('create Amenity name="WiFi"')
+        with patch('sys.stdout', new=StringIO()) as val:
+            HBNBCommand().onecmd('destroy Amenity 121212')
+            self.assertTrue(val.getvalue() == "** no instance found **\n")
+
 
 if __name__ == '__main__':
     unittest.main()

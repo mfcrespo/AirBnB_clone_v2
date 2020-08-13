@@ -11,6 +11,10 @@ In this project we must do::
 * Replace the file storage by a Database storage
 * Map your models to a table in database by using an O.R.M.
 
+<p>
+<img src="https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/images/AirBnb_DB_diagramm.jpg" width="80%" height="80%">
+</p>
+
 This repository contains the second stage of a student project to build a clone of the AirBnB website. 
 
 Environment variables will be your best friend for this project!

@@ -13,6 +13,7 @@ class DBStorage():
     __session = None
 
     def __init__(self):
+        """ inits the sql db storage"""
         db_user = os.environ.get('HBNB_MYSQL_USER')
         db_password = os.environ.get('HBNB_MYSQL_PWD')
         db_host = os.environ.get('HBNB_MYSQL_HOST')

@@ -41,12 +41,15 @@ class DBStorage():
         object_dict = {}
         if cls is None:
             for key in HBNBCommand.classes:
-                for row in self.__session.query(key).all():
-                    object_dict.update({'{}.{}'.format(key, row.id): row})
+                if key != "BaseModel":
+                    val = HBNBCommand.classes[key]
+                    for row in self.__session.query(val).all():
+                        object_dict.update({'{}.{}'.format(key, row.id): row})
             return object_dict
         else:
-            for row in self.__session.query(cls).all():
-                object_dict.update({'{}.{}'.format(cls, row.id): row})
+            if cls is not BaseModel:
+                for row in self.__session.query(cls).all():
+                    object_dict.update({'{}.{}'.format(cls, row.id): row})
             return object_dict
 
     def new(self, obj):

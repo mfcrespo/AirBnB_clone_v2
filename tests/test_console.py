@@ -4,6 +4,7 @@
 import unittest
 import json
 import pep8
+import console
 from io import StringIO
 from unittest.mock import patch
 from console import HBNBCommand
@@ -36,7 +37,7 @@ class TestConsoleClass(unittest.TestCase):
 
     def test_module_doc(self):
         """ check for module documentation """
-        self.assertTrue(len(HBNBCommand.__doc__) > 0)
+        self.assertTrue(len(console.__doc__) > 0)
 
     def test_class_doc(self):
         """ check for documentation """
@@ -299,6 +300,24 @@ class TestConsoleClass(unittest.TestCase):
             HBNBCommand().onecmd('all State')
             self.assertTrue("hello.world" not in my_id.getvalue())
 
+    def test_create(self):
+        """ Test Case to create a object from a class """
+        with patch('sys.stdout', new=StringIO()) as test_cmd:
+            HBNBCommand().onecmd('create')
+            self.assertEqual('** class name missing **\n', test_cmd.getvalue())
+
+        with patch('sys.stdout', new=StringIO()) as test_cmd:
+            HBNBCommand().onecmd('create Class')
+            self.assertEqual('** class doesn\'t exist **\n',
+                             test_cmd.getvalue())
+
+        with patch('sys.stdout', new=StringIO()) as test_cmd:
+            HBNBCommand().onecmd('create User')
+            self.assertTrue(len(test_cmd.getvalue()) > 0)
+
+        with patch('sys.stdout', new=StringIO()) as test_cmd:
+            HBNBCommand().onecmd('all State')
+            self.assertTrue(len(test_cmd.getvalue()) > 0)
 
 if __name__ == '__main__':
     unittest.main()

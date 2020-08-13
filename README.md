@@ -67,6 +67,7 @@ You will always use class attributes for any object. Why not instance attributes
 | `state.py` | [models/state.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/models/state.py) | Te state subclass |
 | `user.py` | [models/user.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/models/user.py) | Te user subclass |
 | `file_storage.py` | [models/engine/file_storage.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/models/engine/file_storage.py) | The file storage class |
+| `db_storage.py` | [models/engine/db_storage.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/models/engine/db_storage.py) | The DB storage class |
 | `test_amenity.py` | [tests/test_amenity.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/tests/test_models/test_amenity.py) | The unittest module for amenity |
 | `test_base_model.py` | [tests/base_model.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/tests/test_models/test_base_model.py) | The unittest module for base model |
 | `test_city.py` | [tests/city.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/tests/test_models/test_city.py) | The unittest module for city |
@@ -77,6 +78,8 @@ You will always use class attributes for any object. Why not instance attributes
 | `test_file_storage.py` | [tests/test_models/test_engine/test_file_storage.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/tests/test_models/test_engine/test_file_storage.py) | The unittest module for file storage |
 | `test_db_storage.py` | [tests/test_models/test_engine/test_db_storage.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/tests/test_models/test_engine/test_db_storage.py) | The unittest module for DB storage |
 | `test_console.py` | [tests/console.py](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/tests/test_console.py) | The unittest module for console |
+| `setup_mysql_test.sql` | [setup_mysql_test.sql](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/setup_mysql_test.sql) | Create database and test user |
+| `setup_mysql_dev.sql` | [setup_mysql_dev.sql](https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/setup_mysql_dev.sql) | Create database |
 <br>
 <br>
 <center> <h2>General Use</h2> </center>

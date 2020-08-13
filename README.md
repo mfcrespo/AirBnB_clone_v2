@@ -117,7 +117,7 @@ $ ./console.py
 | David Orejuela | [daorejuela1](https://github.com/daorejuela1) | [DavidOrejuela14](https://twitter.com/DavidOrejuela14) | [davidorejuela14](https://www.linkedin.com/in/davidorejuela14/) |
 
 <p>
-<img src="https://pbs.twimg.com/profile_images/962795960173846528/sl2HspUe_400x400.jpg" width="20%" height="20%">
+<img src="https://github.com/mfcrespo/AirBnB_clone_v2/blob/master/images/DavidOrejuela.jpg" width="20%" height="20%">
 </p>
 
 [David Orejuela](https://twitter.com/DavidOrejuela14)

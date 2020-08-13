@@ -116,7 +116,7 @@ $ ./console.py
 <img src="https://pbs.twimg.com/profile_images/962795960173846528/sl2HspUe_400x400.jpg" width="20%" height="20%">
 </p>
 
-[Crispthofer Rincon](https://twitter.com/CrispthoAlex)
+[David Orejuela](https://twitter.com/DavidOrejuela14)
 
 <p>
 <img src="https://pbs.twimg.com/profile_images/1116938743968149504/0TQ4K4r3_400x400.jpg" width="20%" height="20%">                                                       

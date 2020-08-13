@@ -47,7 +47,7 @@ class test_fileStorage(unittest.TestCase):
         new = BaseModel()
         temp = storage.all(new)
         self.assertIsInstance(temp, dict)
-       
+
     def test_base_model_instantiation(self):
         """ File is not created on BaseModel save """
         new = BaseModel()

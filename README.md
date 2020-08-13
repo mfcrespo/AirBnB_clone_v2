@@ -2,6 +2,17 @@
 
 # 0x02. [AirBnB](https://www.airbnb.com) clone - MySQL
 
+## Background Context
+Welcome to the [AirBnB clone project Second Part](https://intranet.hbtn.io/concepts/74)! (The Holberton B&B)
+Before starting, please read the AirBnB concept page and watch [this video](https://youtu.be/fb2zxES7ROU) from [Bobby Yang](https://twitter.com/bobstermyang), talking about how HBNB project abstracts the storage part: FileStorage and DBStorage.
+
+It is time to develop our AirBnb clone. The goal of the project is to deploy on your server a simple copy of the website. This project must be composed at the end of its development by:
+
+* A command interpreter to manipulate data without a visual interface, like in a Shell (perfect for development and debugging)
+* A website (the front-end) that shows the final product to everybody: static and dynamic
+* A database or files that store data (data = objects)
+* An API that provides a communication interface between the front-end and your data (retrieve, create, delete, update them)
+
 This repository contains the initial stage of a student project to build a clone of the AirBnB website. This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
 
 ---

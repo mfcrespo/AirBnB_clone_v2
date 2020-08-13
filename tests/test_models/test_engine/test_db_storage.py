@@ -13,6 +13,7 @@ import sys
 import MySQLdb
 
 
+@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', 'file')
 class TestDBStorage(unittest.TestCase):
     """TestDBStorage resume
     Args:

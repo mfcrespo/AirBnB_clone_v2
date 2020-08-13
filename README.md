@@ -22,6 +22,20 @@ Environment variables will be your best friend for this project!
 * HBNB_MYSQL_DB: the database name of your MySQL
 * HBNB_TYPE_STORAGE: the type of storage used. It can be “file” (using FileStorage) or db (using DBStorage)
 
+See to the following picture:
+
+<p>
+<img src="https://github.com/mfcrespo/AirBnB_clone/blob/master/images/Airbnb%20clone%20website.png" width="80%" height="80%">
+</p>
+
+AirBnb Clone is a project that consists of several stages linked together, which will be developed step by step:
+
+* The Console
+* Web Static
+* MySQL storage
+* Web framework - templating
+* RESTful API
+* Web dynamic
 ---
 
 <center><h3>Repository Contents by Project Task</h3> </center>

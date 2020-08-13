@@ -102,3 +102,24 @@ class test_basemodel(unittest.TestCase):
         n = new.to_dict()
         new = BaseModel(**n)
         self.assertFalse(new.created_at == new.updated_at)
+
+    def test_delete(self):
+        """Test delete """
+        new = self.value()
+        new.save()
+        self.assertEqual(type(new.updated_at), datetime.datetime)
+        new.delete()
+        self.assertEqual(type(new.updated_at), datetime.datetime)
+
+    def test_dict(self):
+        """Test creating with dict """
+        kwargs = {'name': "California"}
+        new = self.value(**kwargs)
+        new.save()
+        self.assertTrue("name" in new.__dict__)
+
+    def test_no_weirdkeys(self):
+        """Test that not weird keys are created """
+        new = self.value()
+        new.save()
+        self.assertTrue("_sa_instance_state" not in new.to_dict())

@@ -13,7 +13,13 @@ class test_state(test_basemodel):
         self.name = "State"
         self.value = State
 
-    def test_name3(self):
-        """ """
+    def test_tablename(self):
+        """Test table name """
         new = self.value()
         self.assertEqual(new.__tablename__, "states")
+
+    def test_name(self):
+        """Test table name """
+        new = self.value()
+        new.name = "California"
+        self.assertEqual(new.name, "California")

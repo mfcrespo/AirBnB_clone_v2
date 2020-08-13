@@ -63,7 +63,7 @@ class test_basemodel(unittest.TestCase):
         dictionary = {}
         dictionary.update(i.__dict__)
         if "_sa_instance_state" in dictionary:
-            del dictionary["_sa_instance_state"]     
+            del dictionary["_sa_instance_state"]
         self.assertEqual(str(i), '[{}] ({}) {}'.format(self.name, i.id,
                          dictionary))
 
@@ -84,8 +84,6 @@ class test_basemodel(unittest.TestCase):
         n = {'Name': 'test'}
         new = self.value(**n)
         self.assertTrue("Name" in new.__dict__)
-
-
 
     def test_id(self):
         """ """

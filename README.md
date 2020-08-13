@@ -110,7 +110,7 @@ $ ./console.py
 | Authors | GitHub | Twitter | Linkedin |
 | :---: | :---: | :---: | :---: |
 | Maria Fernanda Crespo | [mfcrespo](https://github.com/mfcrespo) | [@mafe_crespo](https://twitter.com/mafe_crespo) | [mariafernandacrespo](https://www.linkedin.com/in/mariafernandacrespo) |
-| Crispthofer Rincon | [CrispthoAlex](https://github.com/CrispthoAlex) | [CrispthoAlex](https://twitter.com/CrispthoAlex) | [carmurrain](https://www.linkedin.com/in/carmurrain) |
+| David Orejuela | [daorejuela1](https://github.com/daorejuela1) | [DavidOrejuela14](https://twitter.com/DavidOrejuela14) | [davidorejuela14](https://www.linkedin.com/in/davidorejuela14/) |
 
 <p>
 <img src="https://pbs.twimg.com/profile_images/962795960173846528/sl2HspUe_400x400.jpg" width="20%" height="20%">

@@ -37,7 +37,6 @@ def do_deploy(archive_path):
         return False
 
     try:
-        archive_path = "versions/web_static_20200818015236.tgz"
         filename = archive_path.split("/")[1]
         filename1 = (archive_path.split("/")[1]).split(".")[0]
         input_path = "/data/web_static/releases/{}/".format(filename1)

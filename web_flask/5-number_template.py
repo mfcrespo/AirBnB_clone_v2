@@ -12,6 +12,7 @@ The route /number/<n>: display n is a number only if n is an integer
 The route /number_template/<n>: display a HTML page only if n is an integer
 """
 from flask import Flask
+from flask import render_template
 
 app = Flask(__name__)
 
